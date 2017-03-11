@@ -1,0 +1,34 @@
+{
+  "name": "browser-js-env",
+  "version": "0.0.1",
+  "description": "browser environment used to test javascript code and get results",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/function/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoveKino/browser-js-env.git"
+  },
+  "keywords": [
+    "browser",
+    "test",
+    "environment"
+  ],
+  "author": "ddchen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LoveKino/browser-js-env/issues"
+  },
+  "homepage": "https://github.com/LoveKino/browser-js-env#readme",
+  "dependencies": {
+    "crude-server": "0.0.1",
+    "es6-promisify": "^5.0.0",
+    "mkdirp": "^0.5.1",
+    "spawnp": "^0.1.2",
+    "webpack": "^2.2.1"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}
