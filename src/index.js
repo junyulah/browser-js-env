@@ -8,10 +8,6 @@ let buildTestProject = require('./buildTestProject');
 
 /**
  * sometimes, we just want to run some js code in browsers and get results
- *
- * 1. create a simple page which include our js code
- *
- * 2. open this simple page and run js code and get results to our node process
  */
 
 /**
@@ -37,7 +33,7 @@ module.exports = (jsCode, options = {}) => {
                 });
 
                 // visit index html
-                env(`http://127.0.0.1:${address.port}/index.html`);
+                env(`http://127.0.0.1:${address.port}/index.html`, options);
             });
         });
     }).then((data) => {

@@ -24,10 +24,12 @@ module.exports = ({
     } = crudeServer((pathname) => {
         if (pathname === '/index.html') {
             return (req, res) => {
+                res.setHeader('Content-Type', 'text/html; charset=utf-8');
                 createReadStream(indexHTML).pipe(res);
             };
         } else if (pathname === '/asset/app.js') {
             return (req, res) => {
+                res.setHeader('Content-Type', 'application/javascript');
                 createReadStream(appHTML).pipe(res);
             };
         } else if (pathname === reportPath) {

@@ -14,19 +14,27 @@ let retp = require('./test.js');
  * TODO ACK
  */
 Promise.resolve(retp).then((ret) => {
-    fetch('/__api/__reportData', {
-        method: 'POST',
-        body: JSON.stringify({
+    let passData = null;
+
+    try {
+        passData = JSON.stringify({
             result: ret,
             type: 'normal'
-        })
+        });
+    } catch (err) {
+        passData = JSON.stringify({
+            errorMsg: `The result of js code can not be json stringified. Result is ${ret}.`,
+            type: 'error'
+        });
+    }
+
+    return fetch('/__api/__reportData', {
+        method: 'POST',
+        body: passData
     }).then((response) => {
         return response.json();
     }).then((json) => {
         console.log(json); // eslint-disable-line
         window.close();
-    }).catch(err => {
-        // TODO handle error
-        console.log(err); // eslint-disable-line
     });
 });
