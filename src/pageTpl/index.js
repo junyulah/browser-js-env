@@ -8,6 +8,7 @@
  * 3. get the result of testing code and send it back to server
  */
 
+// TODO exception when require?
 let retp = require('./test.js');
 
 /**
