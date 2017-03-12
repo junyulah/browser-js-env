@@ -25,8 +25,6 @@ let buildTestProject = (jsCode, options) => {
     let testTestJsPath = path.join(testDir, 'test.js');
     let testWebpackConfigJsPath = path.join(testDir, 'webpack.config.js');
 
-    let webpackBinPath = path.join(__dirname, '../node_modules/.bin/webpack');
-
     return mkdirp(testDir).then(() => {
         // copy html file, js file
         return Promise.all([
@@ -39,7 +37,7 @@ let buildTestProject = (jsCode, options) => {
         return writeFile(testTestJsPath, jsCode, 'utf-8');
     }).then(() => {
         // building with webpack
-        return spawnp(webpackBinPath, [], {
+        return spawnp('webpack', [], {
             cwd: testDir,
             stdio: 'inherit'
         });

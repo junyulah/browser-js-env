@@ -1,6 +1,6 @@
 {
   "name": "browser-js-env",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "browser environment used to test javascript code and get results",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/LoveKino/browser-js-env#readme",
   "dependencies": {
     "crude-server": "0.0.1",
+    "del": "^2.2.2",
     "es6-promisify": "^5.0.0",
     "mkdirp": "^0.5.1",
     "spawnp": "^0.1.2",

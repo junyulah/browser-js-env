@@ -3,6 +3,7 @@
 let path = require('path');
 let Server = require('./server');
 let env = require('./env');
+let del = require('del');
 
 let buildTestProject = require('./buildTestProject');
 
@@ -42,5 +43,26 @@ module.exports = (jsCode, options = {}) => {
         } else {
             return data.result;
         }
+    }).then((data) => {
+        // clean test project
+        if (options.clean) {
+            return del([options.testDir], {
+                force: true
+            }).then(() => {
+                return data;
+            });
+        }
+
+        return data;
+    }).catch(err => {
+        // clean test project
+        if (options.clean) {
+            return del([options.testDir], {
+                force: true
+            }).then(() => {
+                throw err;
+            });
+        }
+        throw err;
     });
 };
