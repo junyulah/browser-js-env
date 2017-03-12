@@ -20,4 +20,22 @@ describe('index', () => {
             assert.equal(ret, 'hello');
         });
     });
+
+    it('webpack-require', () => {
+        let p = path.join(__dirname, '../fixture/webpackRequire/index.js');
+
+        return browserJsEnvTest(`module.exports = require("${p}")`, {
+            testDir: path.join(__dirname, '../fixture/__test_dir__2')
+        }).then((ret) => {
+            assert.equal(ret, 6);
+        });
+    });
+
+    it('require test code exception', () => {
+        return browserJsEnvTest('throw new Error("on purpose")', {
+            testDir: path.join(__dirname, '../fixture/__test_dir__3')
+        }).catch(err => {
+            assert.equal(err.toString().indexOf('on purpose') !== -1, true);
+        });
+    });
 });

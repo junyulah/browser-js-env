@@ -38,7 +38,7 @@ module.exports = (jsCode, options = {}) => {
         });
     }).then((data) => {
         if (data.type === 'error') {
-            throw new Error(data.errorMasg);
+            throw new Error(data.errorMsg);
         } else {
             return data.result;
         }
