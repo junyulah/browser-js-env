@@ -20,10 +20,10 @@ let buildTestProject = (jsCode, options) => {
     let indexJsTplPath = options.indexJsTplPath || INDEX_JS;
     let webpackJsTplPath = options.webpackJsTplPath || WEBPACK_CONFIG_JS;
 
-    let testHtmlPath = path.join(testDir, 'index.html');
-    let testIndexJsPath = path.join(testDir, 'index.js');
-    let testTestJsPath = path.join(testDir, 'test.js');
-    let testWebpackConfigJsPath = path.join(testDir, 'webpack.config.js');
+    const testHtmlPath = path.join(testDir, 'index.html');
+    const testIndexJsPath = path.join(testDir, 'index.js');
+    const testTestJsPath = path.join(testDir, 'test.js');
+    const testWebpackConfigJsPath = path.join(testDir, 'webpack.config.js');
 
     return mkdirp(testDir).then(() => {
         // copy html file, js file

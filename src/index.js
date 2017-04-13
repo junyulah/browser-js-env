@@ -20,11 +20,13 @@ let buildTestProject = require('./buildTestProject');
 module.exports = (jsCode, options = {}) => {
     options.testDir = path.resolve(options.testDir || '__test_in_browser_env__');
 
+    // build test project first
     return buildTestProject(jsCode, options).then(() => {
         let {
             start, setReceiveHandler
         } = Server(options);
 
+        // run test server
         return start().then(({
             address
         }) => {
