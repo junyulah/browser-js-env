@@ -42,4 +42,13 @@ describe('index', () => {
             assert.equal(err.toString().indexOf('on purpose') !== -1, true);
         });
     });
+
+    it('refer document', () => {
+        return browserJsEnvTest('module.exports = document.title', {
+            testDir: path.join(__dirname, '../fixture/__test_dir__1'),
+            clean: true
+        }).then((ret) => {
+            assert.equal(ret, 'browser-js-env:test');
+        });
+    });
 });
