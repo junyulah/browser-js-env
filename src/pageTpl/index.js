@@ -1,5 +1,7 @@
 'use strict';
 
+// hack console.log used to pipe log from web client
+
 /**
  * 1. loading testing code
  *
@@ -11,6 +13,21 @@
 // TODO log stream
 
 let passData = null;
+
+let oldLog = console.log; // eslint-disable-line
+
+const reportPath = '/__api/__reportData';
+const logPath = '/__api/__log';
+
+console.log = function(...args) { // eslint-disable-line
+    fetch(logPath, {
+        method: 'POST',
+        body: JSON.stringify(args)
+    });
+
+    // send log to server
+    return oldLog.apply(this, args);
+};
 
 try {
     // TODO exception when require?
@@ -41,13 +58,14 @@ try {
  * TODO ACK
  */
 Promise.resolve(passData).then((passData) => {
-    return fetch('/__api/__reportData', {
+    return fetch(reportPath, {
         method: 'POST',
         body: passData
     }).then((response) => {
         return response.json();
     }).then((json) => {
         console.log(json); // eslint-disable-line
+        // TODO option to keep window
         window.close();
     });
 });

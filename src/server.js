@@ -2,17 +2,15 @@
 
 let crudeServer = require('crude-server');
 let path = require('path');
+let mime = require('mime-types');
 let {
     createReadStream
 } = require('fs');
 
 module.exports = ({
     testDir,
-    reportPath = '/__api/__reportData'
+    reportPath = '/__api/__reportData', logPath = '/__api/__log'
 }) => {
-    let indexHTML = path.join(testDir, 'index.html');
-    let appHTML = path.join(testDir, 'asset/app.js');
-
     let receiveHandler = null;
 
     let setReceiveHandler = (handler) => {
@@ -22,17 +20,7 @@ module.exports = ({
     let {
         start, stop
     } = crudeServer((pathname) => {
-        if (pathname === '/index.html') {
-            return (req, res) => {
-                res.setHeader('Content-Type', 'text/html; charset=utf-8');
-                createReadStream(indexHTML).pipe(res);
-            };
-        } else if (pathname === '/asset/app.js') {
-            return (req, res) => {
-                res.setHeader('Content-Type', 'application/javascript');
-                createReadStream(appHTML).pipe(res);
-            };
-        } else if (pathname === reportPath) {
+        if (pathname === reportPath) {
             return (req, res) => {
                 let str = '';
                 req.on('data', (chunk) => {
@@ -50,6 +38,28 @@ module.exports = ({
                         receiveHandler && receiveHandler(data);
                     });
                 });
+            };
+        } else if (pathname === logPath) {
+            return (req, res) => {
+                let str = '';
+                req.on('data', (chunk) => {
+                    str += chunk.toString();
+                });
+
+                req.on('end', () => {
+                    let args = JSON.parse(str);
+
+                    res.end(JSON.stringify({
+                        errNo: 0
+                    }));
+
+                    console.log(...args); // eslint-disable-line
+                });
+            };
+        } else {
+            return (req, res) => { // just pipe static file
+                res.setHeader('Content-Type', mime.lookup(pathname));
+                createReadStream(path.join(testDir, pathname.substring(1))).pipe(res);
             };
         }
     });

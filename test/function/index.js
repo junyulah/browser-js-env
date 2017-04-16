@@ -51,4 +51,12 @@ describe('index', () => {
             assert.equal(ret, 'browser-js-env:test');
         });
     });
+
+    it('log', () => {
+        // TODO assertion
+        return browserJsEnvTest('console.log(123)', {
+            testDir: path.join(__dirname, '../fixture/__test_dir__1'),
+            clean: true
+        });
+    });
 });
