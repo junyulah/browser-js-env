@@ -45,6 +45,12 @@ try {
                 type: 'error'
             });
         }
+    }).catch((err) => {
+        return JSON.stringify({
+            errorMsg: err.toString(),
+            stack: err.stack,
+            type: 'error'
+        });
     });
 } catch (err) {
     passData = JSON.stringify({

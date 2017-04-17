@@ -1,6 +1,6 @@
 {
   "name": "browser-js-env",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "browser environment used to test javascript code and get results",
   "main": "index.js",
   "scripts": {

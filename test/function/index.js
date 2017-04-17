@@ -59,4 +59,24 @@ describe('index', () => {
             clean: true
         });
     });
+
+    it('async resolve', () => {
+        // TODO assertion
+        return browserJsEnvTest('module.exports=new Promise((resolve) => {setTimeout(() => {resolve(12)}, 50)})', {
+            testDir: path.join(__dirname, '../fixture/__test_dir__1'),
+            clean: true
+        }).then((ret) => {
+            assert.equal(ret, 12);
+        });
+    });
+
+    it('async reject', (done) => {
+        browserJsEnvTest('module.exports=new Promise((resolve, reject) => {setTimeout(()=>{reject(new Error("err 123"))}, 50)})', {
+            testDir: path.join(__dirname, '../fixture/__test_dir__1'),
+            clean: true
+        }).catch(err => {
+            assert.equal(err.toString().indexOf('err 123') !== -1, true);
+            done();
+        });
+    });
 });
