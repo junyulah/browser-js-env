@@ -36,10 +36,19 @@ let buildTestProject = (jsCode, options) => {
         // create test.js
         return writeFile(testTestJsPath, jsCode, 'utf-8');
     }).then(() => {
-        // building with webpack
-        return spawnp('webpack', [], {
-            cwd: testDir,
-            stdio: 'inherit'
+        return spawnp('npm bin', [], null, {
+            stdout: true
+        }).then(({
+            stdouts
+        }) => {
+            let binPath =stdouts.join('\n').trim();
+            // building with webpack
+            return spawnp(`${binPath}/webpack`, [], {
+                cwd: testDir,
+                path,
+                stdio: options.displayPack ? 'inherit' : 'ignore'
+            });
+
         });
     });
 };

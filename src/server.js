@@ -9,6 +9,7 @@ let {
 
 module.exports = ({
     testDir,
+    keep,
     reportPath = '/__api/__reportData', logPath = '/__api/__log'
 }) => {
     let receiveHandler = null;
@@ -31,7 +32,8 @@ module.exports = ({
                     let data = JSON.parse(str);
 
                     res.end(JSON.stringify({
-                        errNo: 0
+                        errNo: 0,
+                        keep
                     }));
 
                     stop().then(() => {

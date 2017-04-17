@@ -66,6 +66,8 @@ Promise.resolve(passData).then((passData) => {
     }).then((json) => {
         console.log(json); // eslint-disable-line
         // TODO option to keep window
-        window.close();
+        if (!json.keep) {
+            window.close();
+        }
     });
 });
