@@ -11,22 +11,26 @@ let writeFile = promisify(fs.writeFile);
 
 const PLAIN_HTML = path.join(__dirname, './pageTpl/plain.html');
 const INDEX_JS = path.join(__dirname, './pageTpl/index.js');
+const FAVICON = path.join(__dirname, './pageTpl/favicon.ico');
 
 let buildTestProject = (jsCode, options) => {
     let testDir = options.testDir;
 
     let htmlTplPath = options.htmlTplPath || PLAIN_HTML;
     let indexJsTplPath = options.indexJsTplPath || INDEX_JS;
+    let faviconPath = options.faviconPath || FAVICON;
 
     const testHtmlPath = path.join(testDir, 'index.html');
     const testIndexJsPath = path.join(testDir, 'index.js');
     const testTestJsPath = path.join(testDir, 'test.js');
+    const testFaviconPath = path.join(testDir, 'test.js');
 
     return mkdirp(testDir).then(() => {
         // copy html file, js file
         return Promise.all([
             copyFile(htmlTplPath, testHtmlPath),
-            copyFile(indexJsTplPath, testIndexJsPath)
+            copyFile(indexJsTplPath, testIndexJsPath),
+            copyFile(faviconPath, testFaviconPath)
         ]);
     }).then(() => {
         // create test.js
