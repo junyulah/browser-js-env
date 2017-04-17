@@ -23,7 +23,7 @@ let buildTestProject = (jsCode, options) => {
     const testHtmlPath = path.join(testDir, 'index.html');
     const testIndexJsPath = path.join(testDir, 'index.js');
     const testTestJsPath = path.join(testDir, 'test.js');
-    const testFaviconPath = path.join(testDir, 'test.js');
+    const testFaviconPath = path.join(testDir, 'favicon.ico');
 
     return mkdirp(testDir).then(() => {
         // copy html file, js file
