@@ -10,6 +10,7 @@ let {
 module.exports = ({
     testDir,
     keep,
+    apiMap = {},
     reportPath = '/__api/__reportData', logPath = '/__api/__log'
 }) => {
     let receiveHandler = null;
@@ -58,6 +59,8 @@ module.exports = ({
                     console.log(...args); // eslint-disable-line
                 });
             };
+        } else if (apiMap[pathname]) {
+            return apiMap[pathname];
         } else {
             return (req, res) => { // just pipe static file
                 res.setHeader('Content-Type', mime.lookup(pathname));
