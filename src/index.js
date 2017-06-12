@@ -27,7 +27,7 @@ module.exports = (jsCode, options = {}) => {
         } = Server(options);
 
         // run test server
-        return start().then(({
+        return start(options.port = 0).then(({
             address
         }) => {
             return new Promise((resolve) => {

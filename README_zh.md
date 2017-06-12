@@ -2,49 +2,49 @@
 
 [中文文档](./README_zh.md)   [document](./README.md)
 
-Calling browser to run some js code and return the result to you. You can use nodeJs interfaces or CLI interfaces.
-- [install](#install)
-- [usage](#usage)
-  * [CLI quick run](#cli-quick-run)
-  * [CLI options](#cli-options)
-  * [API quick run](#api-quick-run)
-- [develop](#develop)
-  * [file structure](#file-structure)
-  * [run tests](#run-tests)
-- [license](#license)
+调用浏览器运行一些js代码，并返回结果。可以使用nodeJs接口或者CLI接口调用
+- [安装](#%E5%AE%89%E8%A3%85)
+- [使用方法](#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95)
+  * [命令行快速运行](#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BF%AB%E9%80%9F%E8%BF%90%E8%A1%8C)
+  * [CLI 选项](#cli-%E9%80%89%E9%A1%B9)
+  * [API 快速运行](#api-%E5%BF%AB%E9%80%9F%E8%BF%90%E8%A1%8C)
+- [开发](#%E5%BC%80%E5%8F%91)
+  * [文件结构](#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84)
+  * [运行测试用例](#%E8%BF%90%E8%A1%8C%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B)
+- [许可证](#%E8%AE%B8%E5%8F%AF%E8%AF%81)
 
-## install
+## 安装
 
-`npm i browser-js-env --save` or `npm i browser-js-env --save-dev`
+`npm i browser-js-env --save` 或者 `npm i browser-js-env --save-dev`
 
-Install on global, using `npm i browser-js-env -g`
+全局安装, 使用 `npm i browser-js-env -g`
 
 
 
-## usage
+## 使用方法
 
-### CLI quick run
+### 命令行快速运行
 
 - jsinbrowser
 
-Calling browser to run some js code and return the result to you.
+ 调用浏览器运行一些js代码，并返回结果
 
 
 ```shell
-commands
+命令
 
     $  ./bin/jsinbrowser -c "module.exports = document.title" --clean
 ```
 
 ```
-output
+输出
 
     browser-js-env:test
 
 ```
 
 
-### CLI options
+### CLI 选项
 
 - jsinbrowser
 
@@ -67,9 +67,9 @@ Options:
 ```
 
 
-### API quick run
+### API 快速运行
 
-Calling local browser environment
+ 调用本地浏览器环境
 
 ```js
 let browserJsEnv = require('browser-js-env')
@@ -80,7 +80,7 @@ browserJsEnv('module.exports = document.title', {
 
 
 
-Support promise
+ 支持promise
 
 ```js
 let browserJsEnv = require('browser-js-env')
@@ -94,7 +94,7 @@ browserJsEnv('module.exports=new Promise((resolve) => {setTimeout(() => {resolve
 
 
 
-Support commonJs (using webpack)
+ 支持commonJs (内部通过webpack打包)
 
 ```js
 let browserJsEnv = require('browser-js-env')
@@ -108,7 +108,7 @@ browserJsEnv("require('path')", {
 
 
 
-Make ajax testing simple
+ 可以快速测试ajax
 
 ```js
 let browserJsEnv = require('browser-js-env')
@@ -128,7 +128,7 @@ browserJsEnv('module.exports = fetch("/api/test")', {
 
 
 
-Run js code in difference browser, just configure appPath
+ 可以调用不同浏览器中运行，只需要配置appPath
 
 ```js
 let browserJsEnv = require('browser-js-env')
@@ -144,9 +144,9 @@ browserJsEnv('module.exports = document.title', {
 
 
 
-## develop
+## 开发
 
-### file structure
+### 文件结构
 
 ```
 .    
@@ -178,11 +178,11 @@ browserJsEnv('module.exports = document.title', {
 ```
 
 
-### run tests
+### 运行测试用例
 
 `npm test`
 
-## license
+## 许可证
 
 MIT License
 

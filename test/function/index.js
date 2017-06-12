@@ -79,4 +79,14 @@ describe('index', () => {
             done();
         });
     });
+
+    it('different browser', () => {
+        return browserJsEnvTest('module.exports = document.title', {
+            testDir: path.join(__dirname, '../fixture/__test_dir__1'),
+            clean: true,
+            appPath: '/Applications/Safari.app'
+        }).then((ret) => {
+            assert.equal(ret, 'browser-js-env:test');
+        });
+    });
 });
