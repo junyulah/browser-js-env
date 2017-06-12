@@ -2,7 +2,7 @@
 
 [中文文档](./README_zh.md)   [document](./README.md)
 
-Calling browser to run some js code and return the result to you. You can use nodeJs interfaces or CLI interfaces.
+Calling local browser to run some js code and return the result to you. You can use nodeJs interfaces or CLI interfaces.
 - [install](#install)
 - [usage](#usage)
   * [CLI quick run](#cli-quick-run)
