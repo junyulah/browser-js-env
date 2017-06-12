@@ -1,7 +1,7 @@
 {
   "name": "browser-js-env",
-  "version": "0.0.10",
-  "description": "Calling browser to run some js code and return the result to you. You can use nodeJs interfaces or CLI interfaces.\n[readme-lang:zh]调用浏览器运行一些js代码，并返回结果。可以使用nodeJs接口或者CLI接口调用",
+  "version": "0.0.11",
+  "description": "Calling browser to run some js code and return the result to you. You can use nodeJs interfaces or CLI interfaces.\n[readme-lang:zh]调用浏览器运行一些js代码，并返回结果。可以使用nodeJs接口或者CLI接口调用。",
   "main": "index.js",
   "scripts": {
     "test": "mocha test/function/**/*.js"
