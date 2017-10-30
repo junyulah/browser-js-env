@@ -1,10 +1,10 @@
 {
   "name": "browser-js-env",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Calling local browser to run some js code and return the result to you. You can use nodeJs interfaces or CLI interfaces.\n[readme-lang:zh]调用本地浏览器运行一些js代码，并返回结果。可以使用nodeJs接口或者CLI接口调用。",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/function/**/*.js"
+    "test": "mocha test/function/**/*.js -t 100000"
   },
   "bin": {
     "jsinbrowser": "./bin/jsinbrowser"
@@ -31,6 +31,7 @@
     "mime-types": "^2.1.15",
     "mkdirp": "^0.5.1",
     "spawnp": "^0.1.2",
+    "uuid": "^3.1.0",
     "webpack": "^2.2.1",
     "yargs": "^7.1.0"
   },

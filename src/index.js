@@ -4,6 +4,7 @@ let path = require('path');
 let Server = require('./server');
 let env = require('./env');
 let del = require('del');
+const uuidv4 = require('uuid/v4');
 
 let buildTestProject = require('./buildTestProject');
 
@@ -18,12 +19,13 @@ let buildTestProject = require('./buildTestProject');
  * }
  */
 module.exports = (jsCode, options = {}) => {
-    options.testDir = path.resolve(options.testDir || '__test_in_browser_env__');
+    options.testDir = path.resolve(options.testDir || ('__test_in_browser_env__' + uuidv4()));
 
     // build test project first
     return buildTestProject(jsCode, options).then(() => {
         let {
-            start, setReceiveHandler
+            start,
+            setReceiveHandler
         } = Server(options);
 
         // run test server

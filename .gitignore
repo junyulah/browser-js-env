@@ -39,5 +39,3 @@ jspm_packages
 *.swp
 *.swn
 *.DS_Store
-
-test/fixture/*

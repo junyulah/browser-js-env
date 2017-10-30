@@ -7,7 +7,6 @@ let assert = require('assert');
 describe('index', () => {
     it('base', () => {
         return browserJsEnvTest('module.exports = 1 + 1', {
-            testDir: path.join(__dirname, '../fixture/__test_dir__0'),
             clean: true
         }).then((ret) => {
             assert.equal(ret, 2);
@@ -16,7 +15,6 @@ describe('index', () => {
 
     it('string', () => {
         return browserJsEnvTest('module.exports = "hello"', {
-            testDir: path.join(__dirname, '../fixture/__test_dir__1'),
             clean: true
         }).then((ret) => {
             assert.equal(ret, 'hello');
@@ -27,7 +25,6 @@ describe('index', () => {
         let p = path.join(__dirname, '../fixture/webpackRequire/index.js');
 
         return browserJsEnvTest(`module.exports = require("${p}")`, {
-            testDir: path.join(__dirname, '../fixture/__test_dir__2'),
             clean: true
         }).then((ret) => {
             assert.equal(ret, 6);
