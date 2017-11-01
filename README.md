@@ -1,57 +1,48 @@
+
 # browser-js-env
+> Calling local browser to run some js code and return the result to you. You can use both nodeJs interfaces or CLI interfaces.
 
-[中文文档](./README_zh.md)   [document](./README.md)
+## Table of Contents
 
-Calling local browser to run some js code and return the result to you. You can use nodeJs interfaces or CLI interfaces.
-- [install](#install)
-- [usage](#usage)
-  * [CLI quick run](#cli-quick-run)
-  * [CLI options](#cli-options)
-  * [API quick run](#api-quick-run)
-- [develop](#develop)
-  * [file structure](#file-structure)
-  * [run tests](#run-tests)
-- [license](#license)
+- [Features](#features)
+- [Installation](#installation)
+- [Quick CLI Example](#quick-cli-example)
+  * [check cli options](#check-cli-options)
+  * [cli quick start](#cli-quick-start)
+- [Quick API Example](#quick-api-example)
+  * [quick run](#quick-run)
+  * [support promise](#support-promise)
+  * [support commonJs (by using webpack)](#support-commonjs-by-using-webpack)
+  * [run js code in difference browser, just configure appPath](#run-js-code-in-difference-browser-just-configure-apppath)
+- [License](#license)
 
-## install
-
-`npm i browser-js-env --save` or `npm i browser-js-env --save-dev`
-
-Install on global, using `npm i browser-js-env -g`
-
-
-
-## usage
-
-### CLI quick run
-
-- jsinbrowser
-
-Calling browser to run some js code and return the result to you.
+## Features
+- Run js code in browser, get results, can be async.
+- Easy to run js code in different browsers.
+- Make ajax easy to test.
 
 
-```shell
-commands
-
-    $  ./bin/jsinbrowser -c "module.exports = document.title" --clean
-```
+## Installation
 
 ```
-output
-
-    browser-js-env:test
-
+npm i browser-js-env --save
 ```
 
+Install on global
+```
+npm i browser-js-env -g
+```
 
-### CLI options
+## Quick CLI Example
 
-- jsinbrowser
+### [check cli options](sample/cli/options)  [[show]](doc/images/cliSamples-sample-0.gif)
 
-```shell
 
-$ ./node_modules/browser-js-env/bin/jsinbrowser -h
 
+- run sample
+
+```
+$ ./node_modules/.bin/jsinbrowser -h 
 Usage:  jsinbrowser
     -c [js code]
     -t [test directory, default is __test_in_browser_env__]
@@ -67,141 +58,136 @@ Options:
 ```
 
 
-### API quick run
 
-Calling local browser environment
+### [cli quick start](sample/cli/quickStart)  [[show]](doc/images/cliSamples-sample-1.gif)
+
+
+
+- run sample
+
+```
+$ ./node_modules/.bin/jsinbrowser -c "module.exports=document.title;" 
+browser-js-env:test
+
+```
+
+
+
+
+
+
+## Quick API Example
+
+### [quick run](sample/api/quickStart)  [[show]](doc/images/apiSamples-sample-0.gif)
+
+- [test.js](../../../..)
 
 ```js
-let browserJsEnv = require('browser-js-env')
+let browserJsEnv = require('browser-js-env');
 browserJsEnv('module.exports = document.title', {
     clean: true
+}).then((title) => {
+    console.log(title);
 });
+
+```
+
+- run sample
+
+```
+$ node test.js 
+browser-js-env:test
+
 ```
 
 
 
-Support promise
+### [support promise](sample/api/supportPromise)  [[show]](doc/images/apiSamples-sample-1.gif)
+
+- [test.js](../../../..)
 
 ```js
-let browserJsEnv = require('browser-js-env')
-let path = require('path');
+let browserJsEnv = require('browser-js-env');
 
-browserJsEnv('module.exports=new Promise((resolve) => {setTimeout(() => {resolve(12)}, 50)})', {
-    testDir: path.join(__dirname, './__test_dir__2'),
-    clean: true
+browserJsEnv(`
+module.exports = new Promise((resolve) => {
+    setTimeout(() => {
+        resolve(12)
+    }, 50);
+})`,
+
+    {
+        clean: true
+    }).then((value) => {
+    console.log(value);
 });
+
+```
+
+- run sample
+
+```
+$ node test.js 
+12
+
 ```
 
 
 
-Support commonJs (using webpack)
+### [support commonJs (by using webpack)](sample/api/commonJs)  [[show]](doc/images/apiSamples-sample-2.gif)
+
+- [test.js](../../../..)
 
 ```js
-let browserJsEnv = require('browser-js-env')
-let path = require('path');
+let browserJsEnv = require('browser-js-env');
+browserJsEnv("var path = require('path');module.exports = path.join('/a', 'b/c');",
 
-browserJsEnv("require('path')", {
-    testDir: path.join(__dirname, './__test_dir__3'),
-    clean: true
+    {
+        clean: true
+    }).then((title) => {
+    console.log(title);
 });
+
+```
+
+- run sample
+
+```
+$ node test.js 
+/a/b/c
+
 ```
 
 
 
-Make ajax testing simple
+### [run js code in difference browser, just configure appPath](sample/api/appPath)  [[show]](doc/images/apiSamples-sample-3.gif)
+
+- [test.js](../../../..)
 
 ```js
-let browserJsEnv = require('browser-js-env')
-let path = require('path');
-
-browserJsEnv('module.exports = fetch("/api/test")', {
-    testDir: path.join(__dirname, './__test_dir__4'),
-    apiMap: {
-        '/api/test': (req, res) => {
-            res.end("hello world!");
-        }
-    },
-
-    clean: true
-});
-```
-
-
-
-Run js code in difference browser, just configure appPath
-
-```js
-let browserJsEnv = require('browser-js-env')
-let path = require('path');
-
+let browserJsEnv = require('browser-js-env');
 browserJsEnv('module.exports = document.title', {
-    testDir: path.join(__dirname, './__test_dir__5'),
     clean: true,
     appPath: '/Applications/Safari.app'
 });
+
+```
+
+- run sample
+
+```
+$ node test.js 
+
 ```
 
 
 
 
-## develop
-
-### file structure
-
-```
-.    
-│──LICENSE    
-│──README.md    
-│──README_zh.md    
-│──TODO.md    
-│──bin    
-│   └──jsinbrowser    
-│──index.js    
-│──package.json    
-│──src    
-│   │──buildTestProject.js    
-│   │──env.js    
-│   │──index.js    
-│   │──pageTpl    
-│   │   │──favicon.ico    
-│   │   │──index.js    
-│   │   └──plain.html    
-│   └──server.js    
-└──test    
-    │──fixture    
-    │   └──webpackRequire    
-    │       │──add.js    
-    │       └──index.js    
-    └──function    
-        │──ajax.js    
-        └──index.js     
-```
 
 
-### run tests
+## License
 
-`npm test`
+browser-js-env is [MIT licensed](./LICENSE)
 
-## license
-
-MIT License
-
-Copyright (c) 2017 chenjunyu
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+___
+Document was generated by [docway](https://github.com/LoveKino/docway).

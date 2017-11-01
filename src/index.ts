@@ -1,9 +1,9 @@
-import path = require('path');
-import Server = require('./server');
-import env  = require('./env');
-import del = require('del');
-import uuidv4 = require('uuid/v4');
-import buildTestProject = require('./buildTestProject');
+import path = require("path");
+import Server = require("./server");
+import env  = require("./env");
+import del = require("del");
+import uuidv4 = require("uuid/v4");
+import buildTestProject = require("./buildTestProject");
 
 /**
  * sometimes, we just want to run some js code in browsers and get results
@@ -15,12 +15,12 @@ import buildTestProject = require('./buildTestProject');
  *   keep
  * }
  */
-export = (jsCode, options: any = {}) => {
-    options.testDir = path.resolve(options.testDir || ('__test_in_browser_env__' + uuidv4()));
+export = (jsCode: string, options: any = {}) => {
+    options.testDir = path.resolve(options.testDir || ("__test_in_browser_env__" + uuidv4()));
 
     // build test project first
     return buildTestProject(jsCode, options).then(() => {
-        let {
+        const {
             start,
             setReceiveHandler
         } = Server(options);
@@ -30,16 +30,14 @@ export = (jsCode, options: any = {}) => {
             address
         }) => {
             return new Promise((resolve) => {
-                setReceiveHandler((data) => {
-                    resolve(data);
-                });
+                setReceiveHandler(resolve);
 
                 // visit index html
                 env(`http://127.0.0.1:${address.port}/index.html`, options);
             });
         });
     }).then((data) => {
-        if (data.type === 'error') {
+        if (data.type === "error") {
             throw new Error(data.errorMsg);
         } else {
             return data.result;
