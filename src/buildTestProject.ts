@@ -1,19 +1,19 @@
-'use strict';
+import path = require("path");
+import promisify = require('es6-promisify');
+import fs = require('fs');
+import webpack = require('webpack');
+import mkdir = require('mkdirp');
 
-let path = require('path');
-let promisify = require('es6-promisify');
-let fs = require('fs');
-let webpack = require('webpack');
+const mkdirp = promisify(mkdir);
 
-let mkdirp = promisify(require('mkdirp'));
 let readFile = promisify(fs.readFile);
 let writeFile = promisify(fs.writeFile);
 
-const PLAIN_HTML = path.join(__dirname, './pageTpl/plain.html');
-const INDEX_JS = path.join(__dirname, './pageTpl/index.js');
-const FAVICON = path.join(__dirname, './pageTpl/favicon.ico');
+const PLAIN_HTML = path.join(__dirname, '../pageTpl/plain.html');
+const INDEX_JS = path.join(__dirname, '../pageTpl/index.js');
+const FAVICON = path.join(__dirname, '../pageTpl/favicon.ico');
 
-let buildTestProject = (jsCode, options) => {
+export = (jsCode, options) => {
     let testDir = options.testDir;
 
     let htmlTplPath = options.htmlTplPath || PLAIN_HTML;
@@ -67,5 +67,3 @@ let copyFile = (srcFile, tarFile) => {
         return writeFile(tarFile, str, 'utf-8');
     });
 };
-
-module.exports = buildTestProject;

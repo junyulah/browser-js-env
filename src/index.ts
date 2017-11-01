@@ -1,12 +1,9 @@
-'use strict';
-
-let path = require('path');
-let Server = require('./server');
-let env = require('./env');
-let del = require('del');
-const uuidv4 = require('uuid/v4');
-
-let buildTestProject = require('./buildTestProject');
+import path = require('path');
+import Server = require('./server');
+import env  = require('./env');
+import del = require('del');
+import uuidv4 = require('uuid/v4');
+import buildTestProject = require('./buildTestProject');
 
 /**
  * sometimes, we just want to run some js code in browsers and get results
@@ -18,7 +15,7 @@ let buildTestProject = require('./buildTestProject');
  *   keep
  * }
  */
-module.exports = (jsCode, options = {}) => {
+export = (jsCode, options: any = {}) => {
     options.testDir = path.resolve(options.testDir || ('__test_in_browser_env__' + uuidv4()));
 
     // build test project first

@@ -1,15 +1,13 @@
 'use strict';
 
-let {
-    spawn
-} = require('child_process');
+import { spawn } from 'child_process';
 
 /**
  * TODO support window
  * TODO support any browser
  */
-module.exports = (pageUrl, {
-    appPath
+export = (pageUrl, {
+    appPath = ''
 } = {}) => {
     if (appPath) {
         return isWindow() ? spawn(appPath, [pageUrl]) : spawn('open', ['-a', appPath, pageUrl]);
