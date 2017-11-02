@@ -13,7 +13,7 @@
   * [quick run](#quick-run)
   * [support promise](#support-promise)
   * [support commonJs (by using webpack)](#support-commonjs-by-using-webpack)
-  * [run js code in difference browser, just configure appPath](#run-js-code-in-difference-browser-just-configure-apppath)
+  * [try using safari as a browser](#try-using-safari-as-a-browser)
   * [try using electron as a browser](#try-using-electron-as-a-browser)
   * [try using headless chrome](#try-using-headless-chrome)
 - [License](#license)
@@ -49,7 +49,8 @@ Usage:  jsinbrowser
     -c [js code]
     -t [test directory, default is __test_in_browser_env__]
     -k [keep window, default will close window]
-    -a [app path, used to open url]
+    -o [open template cmd for start a browser with url]
+    --silent [try to open headless browser]
     --clean [clean test directory after running js code]
 
 
@@ -162,15 +163,17 @@ $ node test.js
 
 
 
-### [run js code in difference browser, just configure appPath](sample/api/appPath)  [[show]](doc/images/apiSamples-sample-3.gif)
+### [try using safari as a browser](sample/api/appPath)  [[show]](doc/images/apiSamples-sample-3.gif)
 
 - [test.js](../../../..)
 
 ```js
 let browserJsEnv = require('browser-js-env');
-browserJsEnv('module.exports = document.title', {
+browserJsEnv('module.exports = 2 + 8;', {
     clean: true,
-    appPath: '/Applications/Safari.app'
+    open: 'open -a /Applications/Safari.app <%=url%>' // for mac os
+}).then((ret) => {
+    console.log(ret);
 });
 
 ```
@@ -179,6 +182,7 @@ browserJsEnv('module.exports = document.title', {
 
 ```
 $ node test.js 
+10
 
 ```
 
@@ -186,13 +190,21 @@ $ node test.js
 
 ### [try using electron as a browser](sample/api/electron)  [[show]](doc/images/apiSamples-sample-4.gif)
 
-- [../appPath/test.js](../../../..)
+- [test.js](../../../..)
 
 ```js
-let browserJsEnv = require('browser-js-env');
+const browserJsEnv = require('browser-js-env');
+const electron = require('electron');
+const proc = require('child_process');
+
 browserJsEnv('module.exports = document.title', {
-    clean: true,
-    appPath: '/Applications/Safari.app'
+    // using open interface can be more flexible
+    open: (url) => {
+        proc.spawn(electron, [url]);
+    },
+    clean: true
+}).then((title) => {
+    console.log(title);
 });
 
 ```
@@ -209,13 +221,21 @@ browser-js-env:test
 
 ### [try using headless chrome](sample/api/chromeHeadless)  [[show]](doc/images/apiSamples-sample-5.gif)
 
-- [../appPath/test.js](../../../..)
+- [test.js](../../../..)
 
 ```js
-let browserJsEnv = require('browser-js-env');
-browserJsEnv('module.exports = document.title', {
-    clean: true,
-    appPath: '/Applications/Safari.app'
+const browserJsEnv = require('browser-js-env');
+const proc = require('child_process');
+
+const chromeApp = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+
+browserJsEnv('module.exports = 100 * 2', {
+    open: (url) => {
+        proc.spawn(chromeApp, ['--headless', '--disable-gpu', url]);
+    },
+    clean: true
+}).then((title) => {
+    console.log(title);
 });
 
 ```

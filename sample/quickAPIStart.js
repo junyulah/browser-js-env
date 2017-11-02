@@ -63,7 +63,7 @@ module.exports = {
         display: {
             beforeRun: {
                 files: [{
-                    target: path.join(__dirname, './api/appPath/test.js')
+                    target: path.join(__dirname, './api/electron/test.js')
                 }]
             }
         }
@@ -76,7 +76,7 @@ module.exports = {
         display: {
             beforeRun: {
                 files: [{
-                    target: path.join(__dirname, './api/appPath/test.js')
+                    target: path.join(__dirname, './api/chromeHeadless/test.js')
                 }]
             }
         }
