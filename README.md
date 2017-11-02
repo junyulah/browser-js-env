@@ -14,6 +14,8 @@
   * [support promise](#support-promise)
   * [support commonJs (by using webpack)](#support-commonjs-by-using-webpack)
   * [run js code in difference browser, just configure appPath](#run-js-code-in-difference-browser-just-configure-apppath)
+  * [try using electron as a browser](#try-using-electron-as-a-browser)
+  * [try using headless chrome](#try-using-headless-chrome)
 - [License](#license)
 
 ## Features
@@ -59,7 +61,7 @@ Options:
 
 
 
-### [cli quick start](sample/cli/quickStart)  [[show]](doc/images/cliSamples-sample-1.gif)
+### [cli quick start](sample/cli/options)  [[show]](doc/images/cliSamples-sample-1.gif)
 
 
 
@@ -177,6 +179,52 @@ browserJsEnv('module.exports = document.title', {
 
 ```
 $ node test.js 
+
+```
+
+
+
+### [try using electron as a browser](sample/api/electron)  [[show]](doc/images/apiSamples-sample-4.gif)
+
+- [../appPath/test.js](../../../..)
+
+```js
+let browserJsEnv = require('browser-js-env');
+browserJsEnv('module.exports = document.title', {
+    clean: true,
+    appPath: '/Applications/Safari.app'
+});
+
+```
+
+- run sample
+
+```
+$ node test.js 
+browser-js-env:test
+
+```
+
+
+
+### [try using headless chrome](sample/api/chromeHeadless)  [[show]](doc/images/apiSamples-sample-5.gif)
+
+- [../appPath/test.js](../../../..)
+
+```js
+let browserJsEnv = require('browser-js-env');
+browserJsEnv('module.exports = document.title', {
+    clean: true,
+    appPath: '/Applications/Safari.app'
+});
+
+```
+
+- run sample
+
+```
+$ node test.js 
+200
 
 ```
 

@@ -11,7 +11,7 @@ module.exports = {
         runCmd: './node_modules/.bin/jsinbrowser -h'
     }, {
         name: 'cli quick start',
-        directory: path.join(__dirname, './cli/quickStart'),
+        directory: path.join(__dirname, './cli/options'),
         prepareCmd: 'npm i && npm update',
         runCmd: './node_modules/.bin/jsinbrowser -c "module.exports=document.title;"'
     }]
