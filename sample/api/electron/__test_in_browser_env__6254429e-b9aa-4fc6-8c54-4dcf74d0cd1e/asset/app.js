@@ -156,7 +156,7 @@ Promise.resolve(passData).then((passData) => {
 /* 1 */
 /***/ (function(module, exports) {
 
-module.exports=document.title;
+module.exports = document.title
 
 /***/ }),
 /* 2 */

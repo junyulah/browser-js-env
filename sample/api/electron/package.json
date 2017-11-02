@@ -1,5 +1,5 @@
 {
-  "name": "browser-js-env-samples-cli-commonjs",
+  "name": "browser-js-env-samples-cli-electron",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "browser-js-env": "git+https://github.com/LoveKino/browser-js-env.git"
+    "browser-js-env": "git+https://github.com/LoveKino/browser-js-env.git",
+    "electron": "^1.7.9"
   }
 }

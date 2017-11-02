@@ -28,16 +28,3 @@ browserJsEnv(argv.c, {
 }).catch(err => {
     console.log(err.stack); // eslint-disable-line
 });
-
-/**
- * @readme-quick-run
- *
- * Calling browser to run some js code and return the result to you.
- * [readme-lang:zh] 调用浏览器运行一些js代码，并返回结果
- *
- * ## test tar=bash
- *
- * cd .. #@readme-hide
- *
- * ./bin/jsinbrowser -c "module.exports = document.title" --clean
- */

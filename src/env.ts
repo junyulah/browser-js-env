@@ -5,12 +5,18 @@ import { spawn } from "child_process";
  * TODO support any browser
  */
 export = (pageUrl: string, {
-    appPath = ""
+    open = undefined,
+    openOptions = {},
+    appPath = undefined
 } = {}) => {
-    if (appPath) {
-        return isWindow() ? spawn(appPath, [pageUrl]) : spawn("open", ["-a", appPath, pageUrl]);
+    if (typeof open === "function") {
+       return open(pageUrl);
+    } else if (appPath) {
+        return isWindow() ? spawn(appPath, [pageUrl], openOptions) : spawn("open", ["-a", appPath, pageUrl], openOptions);
+    } else {
+        // default
+        return isWindow() ? spawn("start", [pageUrl], openOptions) : spawn("open", [pageUrl], openOptions);
     }
-    return isWindow() ? spawn("start", [pageUrl]) : spawn("open", [pageUrl]);
 };
 
 const isWindow = () => process.platform === "win32";

@@ -39,8 +39,7 @@
   "devDependencies": {
     "@types/node": "^8.0.47",
     "docway": "0.0.1",
-    "mocha": "^3.2.0",
-    "readme-builder": "0.0.13"
+    "mocha": "^3.2.0"
   },
   "readmeDocOptions": {
     "ignores": [
