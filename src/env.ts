@@ -7,12 +7,11 @@ import template = require("lodash.template");
  */
 export = (pageUrl: string, {
     open = undefined,
-    silient = false,
     openOptions = {},
     appPath = undefined
 } = {}) => {
     if (typeof open === "function") {
-       return open(pageUrl);
+        return open(pageUrl);
     } else if (typeof open === "string") {
         const cmd = template(open)({url: pageUrl});
         return exec(cmd);
