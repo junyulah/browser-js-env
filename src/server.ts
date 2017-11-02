@@ -7,8 +7,7 @@ import {
     createReadStream
 } from "fs";
 
-export = ({
-    testDir,
+export = (testDir, {
     keep,
     apiMap = {},
     reportPath = "/__api/__reportData", logPath = "/__api/__log"

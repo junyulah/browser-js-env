@@ -13,9 +13,7 @@ const PLAIN_HTML = path.join(__dirname, "../pageTpl/plain.html");
 const INDEX_JS = path.join(__dirname, "../pageTpl/index.js");
 const FAVICON = path.join(__dirname, "../pageTpl/favicon.ico");
 
-export = async (jsCode: string, options) => {
-    const testDir = options.testDir;
-
+export = async (jsCode: string, testDir: string, options) => {
     const htmlTplPath = options.htmlTplPath || PLAIN_HTML;
     const indexJsTplPath = options.indexJsTplPath || INDEX_JS;
     const faviconPath = options.faviconPath || FAVICON;

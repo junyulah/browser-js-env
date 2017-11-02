@@ -16,14 +16,14 @@ import buildTestProject = require("./buildTestProject");
  * }
  */
 export = (jsCode: string, options: any = {}) => {
-    options.testDir = path.resolve(options.testDir || ("__test_in_browser_env__" + uuidv4()));
+    const testDir = path.resolve(options.testDir || ("__test_in_browser_env__" + uuidv4()));
 
     // build test project first
-    return buildTestProject(jsCode, options).then(() => {
+    return buildTestProject(jsCode, testDir, options).then(() => {
         const {
             start,
             setReceiveHandler
-        } = Server(options);
+        } = Server(testDir, options);
 
         // run test server
         return start(options.port = 0).then(({
@@ -45,7 +45,7 @@ export = (jsCode: string, options: any = {}) => {
     }).then((data) => {
         // clean test project
         if (options.clean) {
-            return del([options.testDir], {
+            return del([testDir], {
                 force: true
             }).then(() => {
                 return data;
@@ -56,7 +56,7 @@ export = (jsCode: string, options: any = {}) => {
     }).catch(err => {
         // clean test project
         if (options.clean) {
-            return del([options.testDir], {
+            return del([testDir], {
                 force: true
             }).then(() => {
                 throw err;
