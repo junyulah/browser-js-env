@@ -13,6 +13,6 @@ module.exports = {
         name: 'cli quick start',
         directory: path.join(__dirname, './cli/options'),
         prepareCmd: 'npm i && npm update',
-        runCmd: './node_modules/.bin/jsinbrowser -c "module.exports=document.title;"'
+        runCmd: './node_modules/.bin/jsinbrowser --clean -c "module.exports=document.title;"'
     }]
 };

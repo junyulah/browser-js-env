@@ -50,7 +50,6 @@ Usage:  jsinbrowser
     -t [test directory, default is __test_in_browser_env__]
     -k [keep window, default will close window]
     -o [open template cmd for start a browser with url]
-    --silent [try to open headless browser]
     --clean [clean test directory after running js code]
 
 
