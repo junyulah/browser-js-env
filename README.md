@@ -68,7 +68,7 @@ Options:
 - run sample
 
 ```
-$ ./node_modules/.bin/jsinbrowser -c "module.exports=document.title;" 
+$ ./node_modules/.bin/jsinbrowser --clean -c "module.exports=document.title;" 
 browser-js-env:test
 
 ```
