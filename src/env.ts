@@ -11,6 +11,7 @@ export = (pageUrl: string, {
     appPath = undefined
 } = {}) => {
     if (typeof open === "function") {
+        // when use open, it's better to provide a kill function
         return open(pageUrl);
     } else if (typeof open === "string") {
         const cmd = template(open)({url: pageUrl});

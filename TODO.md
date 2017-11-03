@@ -7,3 +7,5 @@
 - plugins for browser-js-env
 
 - heart beat loop
+
+- close browser when finish job
