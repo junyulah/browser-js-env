@@ -12,10 +12,15 @@ export = (testDir, {
     apiMap = {},
     reportPath = "/__api/__reportData", logPath = "/__api/__log"
 }) => {
-    let receiveHandler;
+    const queue = [];
 
-    const setReceiveHandler = (handler) => {
-        receiveHandler = handler;
+    const receiveData = () => {
+        return new Promise((resolve, reject) => {
+            queue.push({
+                resolve,
+                reject
+            });
+        });
     };
 
     const {
@@ -37,7 +42,9 @@ export = (testDir, {
                     }));
 
                     stop().then(() => {
-                        receiveHandler && receiveHandler(data);
+                        queue.forEach(({resolve}) => {
+                            resolve(data);
+                        });
                     });
                 });
             };
@@ -69,6 +76,6 @@ export = (testDir, {
     });
 
     return {
-        start, setReceiveHandler
+        start, receiveData
     };
 };
