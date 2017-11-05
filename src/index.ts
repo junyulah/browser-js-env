@@ -16,7 +16,8 @@ import buildTestProject = require("./buildTestProject");
  * }
  */
 export = async (jsCode: string, options: any = {}) => {
-    const testDir = path.resolve(options.testDir || ("__test_in_browser_env__" + uuidv4()));
+    const cwd = options.cwd || process.cwd();
+    const testDir = path.resolve(options.testDir || path.join(cwd, "..", "__test_in_browser_env__" + uuidv4()));
     let browser;
 
     try {

@@ -8,7 +8,8 @@ let yargs = require('yargs');
 
 yargs.usage(`Usage:  jsinbrowser
     -c [js code]
-    -t [test directory, default is __test_in_browser_env__]
+    -t [test directory, default is __test_in_browser_env__ + uuid]
+    -w [js directory]
     -k [keep window, default will close window]
     -o [open template cmd for start a browser with url]
     --clean [clean test directory after running js code]
@@ -22,7 +23,8 @@ browserJsEnv(argv.c, {
     testDir: argv.t,
     keep: argv.k,
     open: argv.o,
-    clean: argv.clean
+    cwd: argv.w,
+    clean: argv.clean,
 }).then((result) => {
     console.log(result); // eslint-disable-line
 }).catch(err => {
