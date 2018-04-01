@@ -35,7 +35,7 @@ export = async (jsCode: string, options: any = {}) => {
         browser = ret[1];
 
         if (data.type === "error") {
-            throw new Error(data.errorMsg);
+            throw new Error(`Error message: ${data.errorMsg}.\nError stack is ${data.stack}.`);
         }
 
         if (options.clean) {

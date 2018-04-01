@@ -42,7 +42,10 @@ export = async (jsCode: string, testDir: string, options) => {
         output: {
             path: path.join(testDir, "/asset"),
             filename: "[name].js"
-        }
+        },
+
+        mode: "development",
+        devtool: "source-map"
     });
 
     return new Promise((resolve, reject) => {
